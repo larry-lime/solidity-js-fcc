@@ -1,4 +1,5 @@
 import { ethers } from './ethers-5.6.esm.min.js'
+import { abi, contractAddress } from './constants.js'
 
 const connectButton = document.getElementById('connectButton')
 const fundButton = document.getElementById('fundButton')
@@ -18,20 +19,24 @@ async function connect() {
     const accounts = await ethereum.request({ method: 'eth_accounts' })
     console.log(accounts)
   } else {
-    connectButton.innerHTML = 'Please install Metamask!'
+  }
+  connectButton.innerHTML = 'Please install Metamask!'
+}
+
+async function fund() {
+  const ethAmount = '0.1'
+  console.log(`Funding with ${ethAmount}...`)
+  if (typeof window.ethereum !== 'undefined') {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(contractAddress, abi, signer)
+    try {
+      const transactionResponse = await contract.fund({
+        value: ethers.utils.parseEther(ethAmount),
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
-async function fund(ethAmount) {
-  console.log(`Funding with ${ethAmount}...`)
-  if (typeof window.ethereum !== 'undefined') {
-    // provider/ connection to the blockchain
-    // Signer / wallet / someone with some gas
-    // contract that we are interacting with
-    // ^ ABI and address
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = provider.getSigner()
-    const contract = "" //
-    console.log(signer)
-  }
-}
