@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Fund Me App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  Connect to Metamask
+  <script>
+    async function connect() {
+      if (typeof window.ethereum !== "undefined") {
+        await window.ethereum.request({method: 'eth_requestAccounts'})
+        document.getElementById("connectButton").innerHTML = "Connected!"
+        console.log("Connected")
+      } else {
+        document.getElementById("connectButton").innerHTML = "Please install Metamask!"
+      }
+    }
+  </script>
+  <button id="connectButton" onclick="connect()">Connect to Metamask</button>
+</body>
+
+</html>
