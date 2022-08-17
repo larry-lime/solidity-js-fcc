@@ -1,0 +1,6 @@
+[submodule "smart-contract-raffle-hh"]
+	path = smart-contract-raffle-hh
+	url = https://github.com/larry-lime/smart-contract-raffle-backend.git
+[submodule "fund-me-hh"]
+	path = fund-me-hh
+	url = https://github.com/larry-lime/fund-me-backend.git
